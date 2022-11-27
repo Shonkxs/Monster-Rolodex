@@ -1,6 +1,9 @@
 import { Component } from "react";
 import "./App.css";
 
+//Import Components
+import List from "./components/list.component";
+
 export default class App extends Component {
   constructor() {
     //Aufruf von super um .this verwenden zu kömmen
@@ -12,6 +15,7 @@ export default class App extends Component {
     };
   }
 
+  // Beim Plazieren der Componente sollen die User aus der Fake API gefetcht werden
   componentDidMount() {
     fetch("https://jsonplaceholder.typicode.com/users")
       .then((result) => {
@@ -32,13 +36,7 @@ export default class App extends Component {
     return (
       <div className="App">
         <h1>{title}</h1>
-        {monsters.map((monster) => {
-          return (
-            <div key={monster.id}>
-              <h3>{monster.name}</h3>
-            </div>
-          );
-        })}
+        <List monsters={monsters} className="list" />
       </div>
     );
   }

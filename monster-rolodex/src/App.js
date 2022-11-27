@@ -2,7 +2,8 @@ import { Component } from "react";
 import "./App.css";
 
 //Import Components
-import List from "./components/list.component";
+import List from "./components/List/list.component";
+import SearchBox from "./components/SearchBox/searchbox.component";
 
 export default class App extends Component {
   constructor() {
@@ -10,6 +11,7 @@ export default class App extends Component {
     super();
     // Erstellend es State Objects
     this.state = {
+      searchInput: "",
       title: "Monster Rolodex",
       monsters: [],
     };
@@ -30,13 +32,36 @@ export default class App extends Component {
       });
   }
 
+  //Eventhandler
+  onInputChange = (event) => {
+    this.setState(() => {
+      return {
+        searchInput: event.target.value.toLowerCase(),
+      };
+    });
+  };
+
   render() {
-    const { title, monsters } = this.state;
+    //State Constanten
+    const { title, monsters, searchInput } = this.state;
+
+    //Eventhandler Constanten
+    const { onInputChange } = this;
+
+    //App Values (Werte die in der ganzen App benutzt werden können)
+    const filteredMonsters = monsters.filter((monster) => {
+      return monster.name.toLowerCase().includes(searchInput);
+    });
 
     return (
       <div className="App">
         <h1>{title}</h1>
-        <List monsters={monsters} className="list" />
+        <SearchBox
+          className="search-input-monster"
+          placeholder="Suche nach Monstern"
+          eventHandler={onInputChange}
+        />
+        <List monsters={filteredMonsters} className="list-monster" />
       </div>
     );
   }

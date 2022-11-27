@@ -1,5 +1,5 @@
 import { Component } from "react";
-import "./list.component.css";
+import "./list.styles.css";
 
 export default class List extends Component {
   render() {

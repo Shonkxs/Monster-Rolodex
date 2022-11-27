@@ -1,25 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import { Component } from "react";
+import "./App.css";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default class App extends Component {
+  constructor() {
+    //Aufruf von super um .this verwenden zu kömmen
+    super();
+    // Erstellend es State Objects
+    this.state = {
+      title: "Monster Rolodex",
+      monsters: [],
+    };
+  }
+
+  componentDidMount() {
+    fetch("https://jsonplaceholder.typicode.com/users")
+      .then((result) => {
+        return result.json();
+      })
+      .then((response) => {
+        this.setState(() => {
+          return {
+            monsters: response,
+          };
+        });
+      });
+  }
+
+  render() {
+    const { title, monsters } = this.state;
+
+    return (
+      <div className="App">
+        <h1>{title}</h1>
+        {monsters.map((monster) => {
+          return (
+            <div key={monster.id}>
+              <h3>{monster.name}</h3>
+            </div>
+          );
+        })}
+      </div>
+    );
+  }
 }
-
-export default App;

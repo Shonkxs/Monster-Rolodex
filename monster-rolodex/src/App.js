@@ -55,7 +55,7 @@ export default class App extends Component {
 
     return (
       <div className="App">
-        <h1>{title}</h1>
+        <h1 class="title">{title}</h1>
         <SearchBox
           className="search-box"
           placeholder="Suche nach Monstern"

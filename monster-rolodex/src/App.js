@@ -57,11 +57,11 @@ export default class App extends Component {
       <div className="App">
         <h1>{title}</h1>
         <SearchBox
-          className="search-input-monster"
+          className="search-box"
           placeholder="Suche nach Monstern"
           eventHandler={onInputChange}
         />
-        <List monsters={filteredMonsters} className="list-monster" />
+        <List monsters={filteredMonsters} className="flex-list" type="card" />
       </div>
     );
   }

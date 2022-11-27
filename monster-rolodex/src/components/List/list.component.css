@@ -1,0 +1,29 @@
+.flex-list {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 50px;
+  justify-content: center;
+}
+
+.card {
+  background-color: #353535;
+  background-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.3) 0%,
+    rgba(0, 0, 0, 0.9) 100%
+  );
+  transition: all 0.6s;
+  border: 3px solid black;
+  width: 300px;
+  height: 200px;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 16px;
+}
+
+.card:hover {
+  transform: scale(1.2);
+  background-color: #fb2576;
+}

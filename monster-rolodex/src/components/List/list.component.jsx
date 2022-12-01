@@ -1,15 +1,24 @@
 import { Component } from "react";
-import "./list.styles.css";
+import "./list.style.css";
 
 export default class List extends Component {
   render() {
-    const { monsters, className, type } = this.props;
+    const { array } = this.props;
+    let count = 0;
     return (
-      <div className={className}>
-        {monsters.map((monster) => {
+      <div className="list-container">
+        {array.map((item) => {
+          console.log(item);
           return (
-            <div className={type} key={monster.id}>
-              <h3>{monster.name}</h3>
+            <div key={count++} className="list-item">
+              <h3>{item.name.charAt(0).toUpperCase() + item.name.slice(1)}</h3>
+              <a
+                href={"https://www.pokewiki.de/" + item.name}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Zum Monster
+              </a>
             </div>
           );
         })}

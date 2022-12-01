@@ -1,6 +1,10 @@
 body {
   margin: 0;
-  background-color: rgb(19, 19, 19);
+  background: url("./../public/2207_w023_n003_2678b_p1_2678.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
   color: white;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",

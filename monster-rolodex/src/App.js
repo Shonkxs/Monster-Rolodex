@@ -1,39 +1,39 @@
 import { Component } from "react";
 import "./App.css";
 
-//Import Components
-import List from "./components/List/list.component";
-import SearchBox from "./components/SearchBox/searchbox.component";
+//Components Import
+
+import List from "./components/list/list.component";
+import Searchbar from "./components/searchbar/searchbar.component";
 
 export default class App extends Component {
   constructor() {
-    //Aufruf von super um .this verwenden zu kömmen
     super();
-    // Erstellend es State Objects
     this.state = {
       searchInput: "",
-      title: "Monster Rolodex",
       monsters: [],
     };
   }
 
-  // Beim Plazieren der Componente sollen die User aus der Fake API gefetcht werden
   componentDidMount() {
-    fetch("https://jsonplaceholder.typicode.com/users")
-      .then((result) => {
-        return result.json();
-      })
+    fetch("https://pokeapi.co/api/v2/pokemon?limit=1000")
       .then((response) => {
-        this.setState(() => {
-          return {
-            monsters: response,
-          };
-        });
+        return response.json();
+      })
+      .then((result) => {
+        console.log(result.results);
+        this.setState(
+          (state, props) => {
+            return {
+              monsters: result.results,
+            };
+          },
+          () => {}
+        );
       });
   }
 
-  //Eventhandler
-  onInputChange = (event) => {
+  onChange = (event) => {
     this.setState(() => {
       return {
         searchInput: event.target.value.toLowerCase(),
@@ -42,26 +42,20 @@ export default class App extends Component {
   };
 
   render() {
-    //State Constanten
-    const { title, monsters, searchInput } = this.state;
+    const { monsters, searchInput } = this.state;
+    const { onChange } = this;
 
-    //Eventhandler Constanten
-    const { onInputChange } = this;
-
-    //App Values (Werte die in der ganzen App benutzt werden können)
     const filteredMonsters = monsters.filter((monster) => {
       return monster.name.toLowerCase().includes(searchInput);
     });
 
     return (
       <div className="App">
-        <h1 class="title">{title}</h1>
-        <SearchBox
-          className="search-box"
-          placeholder="Suche nach Monstern"
-          eventHandler={onInputChange}
-        />
-        <List monsters={filteredMonsters} className="flex-list" type="card" />
+        <div>
+          <h1>Monster Rolodex</h1>
+          <Searchbar onChange={onChange} />
+          <List array={filteredMonsters} />
+        </div>
       </div>
     );
   }
